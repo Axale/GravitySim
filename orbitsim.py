@@ -1,4 +1,5 @@
 
+from time import time
 import pygame as game
 import sys as sys
 
@@ -21,14 +22,15 @@ class MassObject:
         self.relvectr3 = game.Vector2(((self.location.x - Twox, self.location.y - Twoy)))
 
     def Move(self):
-        self.location.x += self.velocity.x * timestep
-        self.location.y += self.velocity.y * timestep
-
-    def CalcMove(self, MassOne, MassTwo):
-        self.accelx = -MassOne * self.relvectr2.x/(self.relvectr2.magnitude()**3) - MassTwo * self.relvectr3.x/(self.relvectr3.magnitude()**3)
-        self.accely = -MassOne * self.relvectr2.y/(self.relvectr2.magnitude()**3) - MassTwo * self.relvectr3.y/(self.relvectr3.magnitude()**3)
+        self.location.x += self.velocity.x * timestep + .5 * self.accelx * (timestep ** 2)
+        self.location.y += self.velocity.y * timestep + .5 * self.accely * (timestep ** 2)
         self.velocity.x = self.accelx * timestep
         self.velocity.y = self.accely * timestep
+
+    def CalcMove(self, MassOne, MassTwo):
+
+        self.accelx = -MassOne * self.relvectr2.x/((self.relvectr2.x**2 + self.relvectr2.y**2)**(3/2)) - MassTwo * self.relvectr3.x/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
+        self.accely = -MassOne * self.relvectr2.y/((self.relvectr2.x**2 + self.relvectr2.y**2)**(3/2)) - MassTwo * self.relvectr3.y/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
 
 
 def main():
@@ -50,9 +52,6 @@ def main():
             if event.type == game.QUIT: sys.exit()
 
         displayscreen.fill(black)
-        Moving.Move()
-        Fixed.Move()
-        Third.Move()
 
         Moving.RelVects(Fixed.location.x, Fixed.location.y, Third.location.x, Third.location.y)
         Fixed.RelVects(Moving.location.x, Moving.location.y, Third.location.x, Third.location.y)
@@ -61,6 +60,10 @@ def main():
         Fixed.CalcMove(Moving.mass, Third.mass)
         Moving.CalcMove(Fixed.mass, Third.mass)
         Third.CalcMove(Moving.mass, Fixed.mass)
+
+        Moving.Move()
+        Fixed.Move()
+        Third.Move()
 
         Fixed.Draw(displayscreen)
         Moving.Draw(displayscreen)
