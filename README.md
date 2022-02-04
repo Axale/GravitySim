@@ -14,7 +14,8 @@ Each mass is 120 degrees away from eachother
 Each mass has a velocity of a magnitude of 1, perpendicular to the line between the mass and the center of the screen
 
 Todo:
- ~~Write C++ file to speed up simulation generation~~ *
+
+~~Write C++ file to speed up simulation generation~~ *
   
   Clean up and comment existing python code, as well as optimize it
   
