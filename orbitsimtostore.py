@@ -7,7 +7,6 @@ class MassObject:
 
     def __init__(self, location, velocity, mass):
         self.location = game.Vector2(location)
-        self.white = game.Color(255, 255, 255)
         self.velocity = game.Vector2(velocity)
         self.mass = mass
 
@@ -28,9 +27,9 @@ class MassObject:
 
 
 def main():
-    Fixed = MassObject((550.69873, 375), ((3**.5)/2, -1/2), 80)
-    Moving = MassObject((643.30127, 375), ((3**.5)/2, 1/2), 80)
-    Third = MassObject((600, 450), (-1, 0), 80)
+    Fixed = MassObject((556.69873, 375), ((3**.5)/2, -1/2), 75)
+    Moving = MassObject((643.30127, 375), ((3**.5)/2, 1/2), 75)
+    Third = MassObject((600, 450), (-1, 0), 75)
     logs = open('GravitySim/logs.txt', 'w')
     totaltime = 0
 

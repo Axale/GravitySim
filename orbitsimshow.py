@@ -29,7 +29,7 @@ def main():
         Draw(displayscreen, white, float(inputlist[index + 2]), float(inputlist[index + 3]))
         Draw(displayscreen, white, float(inputlist[index + 4]), float(inputlist[index + 5]))
         game.display.flip()
-        index += 30
+        index += 3000
 
 def Draw(displayscreen, white, Coord1, Coord2):
     if Coord1 > 0 and Coord1 < 1200 and Coord2 > 0 and Coord2 < 800:
