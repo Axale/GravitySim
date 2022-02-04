@@ -39,8 +39,8 @@ def main():
     
     displayscreen = game.display.set_mode((1200, 800))
     displayscreen.fill(black)
-    Fixed = MassObject((450, 300), (0, 0), 5)
-    Moving = MassObject((600, 300), (0, 0), 7)
+    Fixed = MassObject((450, 300), (0, 0), 10)
+    Moving = MassObject((600, 300), (0, 0), 10)
     Third = MassObject((550, 450), (0, 0), 10)
     Fixed.Draw(displayscreen)
     Moving.Draw(displayscreen)
