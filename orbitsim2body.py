@@ -20,15 +20,14 @@ class MassObject:
         self.normrelvect = self.relvect.normalize()
 
     def Move(self):
-        self.location.x += self.velocity.x * timestep
-        self.location.y += self.velocity.y * timestep
+        self.location.x += self.velocity.x * timestep + .5 * self.accel.x * (timestep ** 2)
+        self.location.y += self.velocity.y * timestep + .5 * self.accel.y * (timestep ** 2)
+        self.velocity.x += self.accel.x * timestep
+        self.velocity.y += self.accel.y * timestep
 
     def CalcMove(self, MassOne):
-        if(self.relvect.magnitude() > 5):
-            Force = (self.mass * (MassOne))/(self.relvect.magnitude()**2)
-            ForceVect = game.Vector2(self.normrelvect.x * Force, self.normrelvect.y * Force)
-            self.velocity.x += ForceVect.x * timestep / self.mass
-            self.velocity.y += ForceVect.y * timestep / self.mass
+        Accel = ((MassOne))/(self.relvect.magnitude()**2)
+        self.accel = game.Vector2(self.normrelvect.x * Accel, self.normrelvect.y * Accel)
         
 
 
@@ -39,8 +38,8 @@ def main():
     
     displayscreen = game.display.set_mode((1200, 800))
     displayscreen.fill(black)
-    Fixed = MassObject((450, 400), (0, -1), 1000)
-    Moving = MassObject((750, 400), (0, 1), 1000)
+    Fixed = MassObject((450, 400), (0, -.25), 100)
+    Moving = MassObject((750, 400), (0, .25), 100)
     Fixed.Draw(displayscreen)
     Moving.Draw(displayscreen)
     game.display.flip()
@@ -50,14 +49,15 @@ def main():
             if event.type == game.QUIT: sys.exit()
 
         displayscreen.fill(black)
-        Moving.Move()
-        Fixed.Move()
 
         Moving.RelVects(Fixed.location.x, Fixed.location.y)
         Fixed.RelVects(Moving.location.x, Moving.location.y)
 
         Fixed.CalcMove(Moving.mass)
         Moving.CalcMove(Fixed.mass)
+
+        Moving.Move()
+        Fixed.Move()
 
         Fixed.Draw(displayscreen)
         Moving.Draw(displayscreen)

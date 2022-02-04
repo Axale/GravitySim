@@ -3,7 +3,7 @@ from time import time
 import pygame as game
 import sys as sys
 
-timestep = 1
+timestep = .1
 
 
 class MassObject:
@@ -24,13 +24,13 @@ class MassObject:
     def Move(self):
         self.location.x += self.velocity.x * timestep + .5 * self.accelx * (timestep ** 2)
         self.location.y += self.velocity.y * timestep + .5 * self.accely * (timestep ** 2)
-        self.velocity.x = self.accelx * timestep
-        self.velocity.y = self.accely * timestep
+        self.velocity.x += self.accelx * timestep
+        self.velocity.y += self.accely * timestep
 
     def CalcMove(self, MassOne, MassTwo):
 
-        self.accelx = -MassOne * self.relvectr2.x/((self.relvectr2.x**2 + self.relvectr2.y**2)**(3/2)) - MassTwo * self.relvectr3.x/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
-        self.accely = -MassOne * self.relvectr2.y/((self.relvectr2.x**2 + self.relvectr2.y**2)**(3/2)) - MassTwo * self.relvectr3.y/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
+        self.accelx = -MassOne * self.relvectr2.x/((self.relvectr2.magnitude())**(3)) - MassTwo * self.relvectr3.x/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
+        self.accely = -MassOne * self.relvectr2.y/((self.relvectr2.magnitude())**(3)) - MassTwo * self.relvectr3.y/((self.relvectr3.x**2 + self.relvectr3.y**2)**(3/2))
 
 
 def main():
@@ -39,9 +39,9 @@ def main():
     
     displayscreen = game.display.set_mode((1200, 800))
     displayscreen.fill(black)
-    Fixed = MassObject((400, 300), (0, 0), 100)
-    Moving = MassObject((600, 300), (0, 0), 100)
-    Third = MassObject((550, 450), (0, 0), 100)
+    Fixed = MassObject((450, 300), (0, 0), 5)
+    Moving = MassObject((600, 300), (0, 0), 7)
+    Third = MassObject((550, 450), (0, 0), 10)
     Fixed.Draw(displayscreen)
     Moving.Draw(displayscreen)
     Third.Draw(displayscreen)
