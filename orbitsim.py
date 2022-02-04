@@ -3,7 +3,7 @@ from time import time
 import pygame as game
 import sys as sys
 
-timestep = .1
+timestep = .01
 
 
 class MassObject:
@@ -39,9 +39,9 @@ def main():
     
     displayscreen = game.display.set_mode((1200, 800))
     displayscreen.fill(black)
-    Fixed = MassObject((450, 300), (0, 0), 10)
-    Moving = MassObject((600, 300), (0, 0), 10)
-    Third = MassObject((550, 450), (0, 0), 10)
+    Fixed = MassObject((556.69873, 375), ((3**.5)/2, -1/2), 75)
+    Moving = MassObject((643.30127, 375), ((3**.5)/2, 1/2), 75)
+    Third = MassObject((600, 450), (-1, 0), 75)
     Fixed.Draw(displayscreen)
     Moving.Draw(displayscreen)
     Third.Draw(displayscreen)
