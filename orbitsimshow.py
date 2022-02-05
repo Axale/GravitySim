@@ -10,7 +10,7 @@ def main():
 
     displayscreen = game.display.set_mode((1200, 800))
     displayscreen.fill(black)
-    logs = open('GravitySim/logs.txt', 'r')
+    logs = open('logs.txt', 'r')
     inputlogs = logs.read()
     inputlist = inputlogs.split(" ")
     index = 0

@@ -30,7 +30,7 @@ def main():
     Fixed = MassObject((556.69873, 375), ((3**.5)/2, -1/2), 75)
     Moving = MassObject((643.30127, 375), ((3**.5)/2, 1/2), 75)
     Third = MassObject((600, 450), (-1, 0), 75)
-    logs = open('GravitySim/logs.txt', 'w')
+    logs = open('logs.txt', 'w')
     totaltime = 0
 
     while 1:
